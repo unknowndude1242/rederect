@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Logging</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    textarea, button {
+      margin: 10px;
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Support Logging</h1>
+  <textarea id="message" rows="5" placeholder="Enter your message here"></textarea><br>
+  <button onclick="sendWebhook()">Send Support</button>
+
+  <script>
+    // Define the webhook URL
+    const webhookUrl = "https://discord.com/api/webhooks/1328055885418860606/wFmdGXfub0-9GeKy47Yx6_btNPnQ_xfDT-hhEtYHkRE0vzVqeiUaH9hPBDUKpOw21kba";
+
+    function sendWebhook() {
+      const message = document.getElementById("message").value;
+
+      if (!message) {
+        alert("Please enter a message.");
+        return;
+      }
+
+      const payload = {
+        content: message,
+      };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(response => {
+          if (response.ok) {
+            alert("Error");
+            document.getElementById("message").value = ""; // Clear the message field
+          } else {
+            alert("Failed to send message. Please try again.");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("An error occurred while sending the message.");
+        });
+    }
+  </script>
+</body>
+</html>
